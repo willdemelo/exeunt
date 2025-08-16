@@ -13,3 +13,154 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Universes {
+  id              String            @id @default(cuid())
+  title           String
+  content         Json
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Session         Sessions[]
+  Concept         Concepts[]
+  Timeline        Timelines[]
+  Tone            Tones[]
+  Stage           Stages[]
+  SetPiece        SetPieces[]
+  Prop            Props[]
+  Costume         Costumes[]
+  Actor           Actors[]
+  Faction         Factions[]
+  Soundtrack      Soundtracks[]
+}
+
+model Personas {
+  id              String            @id @default(cuid())
+  title           String
+  content         Json
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Session         Sessions[]
+}
+
+model Sessions {
+  id              String            @id @default(cuid())
+  title           String
+  content         Json
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Universe        Universes         @relation(fields:[universeId], references:[id])
+  universeId      String
+  History         Histories?
+  Persona         Personas          @relation(fields: [personaId], references:[id])
+  personaId       String          
+}
+
+model Concepts {
+  id              String            @id @default(cuid())
+  title           String
+  content         Json
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Universe        Universes         @relation(fields:[universeId], references:[id])
+  universeId      String
+}
+
+model Timelines {
+  id              String            @id @default(cuid())
+  title           String
+  content         Json
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Universe        Universes         @relation(fields:[universeId], references:[id])
+  universeId      String
+}
+
+model Tones {
+  id              String            @id @default(cuid())
+  title           String
+  content         Json
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Universe        Universes         @relation(fields:[universeId], references:[id])
+  universeId      String
+}
+
+model Stages {
+  id              String            @id @default(cuid())
+  title           String
+  content         Json
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Universe        Universes         @relation(fields:[universeId], references:[id])
+  universeId      String
+}
+
+model SetPieces {
+  id              String            @id @default(cuid())
+  title           String
+  content         Json
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Universe        Universes         @relation(fields:[universeId], references:[id])
+  universeId      String
+}
+
+model Props {
+  id              String            @id @default(cuid())
+  title           String
+  content         Json
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Universe        Universes         @relation(fields:[universeId], references:[id])
+  universeId      String
+}
+
+model Costumes {
+  id              String            @id @default(cuid())
+  title           String
+  content         Json
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Universe        Universes         @relation(fields:[universeId], references:[id])
+  universeId      String
+}
+
+model Actors {
+  id              String            @id @default(cuid())
+  title           String
+  content         Json
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Universe        Universes         @relation(fields:[universeId], references:[id])
+  universeId      String
+}
+
+model Factions {
+  id              String            @id @default(cuid())
+  title           String
+  content         Json
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Universe        Universes         @relation(fields:[universeId], references:[id])
+  universeId      String
+}
+
+model Soundtracks {
+  id              String            @id @default(cuid())
+  title           String
+  content         Json
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Universe        Universes         @relation(fields:[universeId], references:[id])
+  universeId      String
+}
+
+model Histories {
+  id              String            @id @default(cuid())
+  title           String
+  content         Json
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Session         Sessions          @relation(fields:[sessionId], references:[id])
+  sessionId       String            @unique
+}
