@@ -9,6 +9,16 @@
   --foreground: #171717;
 }
 
+@layer base {
+  html, body, :root { height: 100%; }
+
+  /* Light + Dark (if you use darkMode: 'class') */
+  body {
+    @apply min-h-screen antialiased bg-slate-50 text-slate-900
+           dark:bg-slate-900 dark:text-slate-100;
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -29,7 +39,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.universe-container {
+  @apply container mx-auto p-4 w-full h-[80vh] border-0;
+}
 
-.doc-frame {
-   @apply container mx-auto max-w-screen-lg p-4 w-full h-[80vh] border-0;
+.universe-card {
+  @apply container mx-auto p-4 w-full h-[80vh] border-0;
 }
