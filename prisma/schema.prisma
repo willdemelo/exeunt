@@ -22,7 +22,6 @@ model Universes {
   updatedAt       DateTime          @updatedAt
   Session         Sessions[]
   Concept         Concepts[]
-  Timeline        Timelines[]
   Tone            Tones[]
   Stage           Stages[]
   SetPiece        SetPieces[]
@@ -56,16 +55,6 @@ model Sessions {
 }
 
 model Concepts {
-  id              String            @id @default(cuid())
-  title           String
-  content         Json
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  Universe        Universes         @relation(fields:[universeId], references:[id])
-  universeId      String
-}
-
-model Timelines {
   id              String            @id @default(cuid())
   title           String
   content         Json
@@ -163,4 +152,15 @@ model Histories {
   updatedAt       DateTime          @updatedAt
   Session         Sessions          @relation(fields:[sessionId], references:[id])
   sessionId       String            @unique
+  Timeline        Timelines?
+}
+
+model Timelines {
+  id              String            @id @default(cuid())
+  title           String
+  content         Json
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  History         Histories         @relation(fields:[historyId], references:[id])
+  historyId       String            @unique
 }
