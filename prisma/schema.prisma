@@ -20,6 +20,8 @@ model Universes {
   content         Json
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
+  Persona         Personas[]
+  Timeline        Timelines[]
   Session         Sessions[]
   Concept         Concepts[]
   Tone            Tones[]
@@ -38,6 +40,19 @@ model Personas {
   content         Json
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
+  Universe        Universes         @relation(fields: [universeId], references:[id])
+  universeId      String            @unique
+  Session         Sessions[]
+}
+
+model Timelines {
+  id              String            @id @default(cuid())
+  title           String
+  content         Json
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Universe        Universes         @relation(fields: [universeId], references:[id])
+  universeId      String
   Session         Sessions[]
 }
 
@@ -48,15 +63,25 @@ model Sessions {
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   Universe        Universes         @relation(fields:[universeId], references:[id])
-  universeId      String
-  History         Histories?
+  universeId      String            @unique
   Persona         Personas          @relation(fields: [personaId], references:[id])
-  personaId       String          
+  personaId       String            @unique  
+  Timeline        Timelines         @relation(fields: [timelineId], references:[id])
+  timelineId      String            @unique
+  History         Histories?
+}
+
+model Histories {
+  id              String            @id @default(cuid())
+  content         Json
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Session         Sessions          @relation(fields:[sessionId], references:[id])
+  sessionId       String            @unique
 }
 
 model Concepts {
   id              String            @id @default(cuid())
-  title           String
   content         Json
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
@@ -142,25 +167,4 @@ model Soundtracks {
   updatedAt       DateTime          @updatedAt
   Universe        Universes         @relation(fields:[universeId], references:[id])
   universeId      String
-}
-
-model Histories {
-  id              String            @id @default(cuid())
-  title           String
-  content         Json
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  Session         Sessions          @relation(fields:[sessionId], references:[id])
-  sessionId       String            @unique
-  Timeline        Timelines?
-}
-
-model Timelines {
-  id              String            @id @default(cuid())
-  title           String
-  content         Json
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  History         Histories         @relation(fields:[historyId], references:[id])
-  historyId       String            @unique
 }

@@ -1,6 +1,5 @@
 import { prisma } from '../../../../lib/prisma';
-
-
+import Link from 'next/link';
 
 export default async function UniversePage({
   params,
@@ -18,4 +17,12 @@ export default async function UniversePage({
       universeId: id,
     },
   });
+
+  return (
+    <div>
+      <Link href={`/`}>
+        <p>Return to home page</p>
+      </Link>
+    </div>
+  );
 }
