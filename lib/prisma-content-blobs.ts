@@ -93,4 +93,7 @@ export interface ActorContentBlob {
     // Skills
     skills?: Map<string, string>;
     abilities?: Map<string, string>;
+
+    // Model
+    model?: string;
 }

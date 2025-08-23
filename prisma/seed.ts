@@ -210,6 +210,8 @@ async function main() {
         ])),
         abilities: Object.fromEntries(new Map([
           ['Newtype', ['Advanced']],
+
+        model: 'gpt-4o-mini',
         ])),
       },
       universeId: defaultUniverse?.id,
