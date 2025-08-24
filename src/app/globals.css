@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Put global “base” styles here */
+/* Put global "base" styles here */
 @layer base {
   html, body, :root { height: 100%; }
 
@@ -12,5 +12,28 @@
   body {
     @apply min-h-screen antialiased bg-slate-50 text-slate-900
            dark:bg-slate-900 dark:text-slate-100;
+  }
+}
+
+/* Font utility classes to replace the font() function */
+@layer utilities {
+  .font-sm {
+    @apply text-sm font-sans;
+  }
+  
+  .font-md {
+    @apply text-base font-sans;
+  }
+  
+  .font-lg {
+    @apply text-lg font-sans;
+  }
+
+  .large-card {
+    @apply w-full max-w-5xl mx-auto rounded-2xl border bg-blue-950 p-6 shadow min-h-48;
+  }
+
+  .small-card {
+    @apply p-4 rounded-lg border bg-blue-500;
   }
 }
